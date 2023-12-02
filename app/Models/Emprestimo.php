@@ -60,13 +60,37 @@ class Emprestimo {
     // Database operations
 
     public function createEmprestimo() {
-        $sql = "INSERT INTO emprestimos (aluno_id, livro_id, data_emprestimo, data_devolucao) VALUES (:aluno_id, :livro_id, :data_emprestimo, :data_devolucao)";
+        // Verifica se o aluno está devendo livros
+        if (!$this->alunoEstaDevedor($this->aluno_id)) {
+            // Se não estiver devendo, realiza o empréstimo
+            $sql = "INSERT INTO emprestimos (aluno_id, livro_id, data_emprestimo, data_devolucao) VALUES (:aluno_id, :livro_id, :data_emprestimo, :data_devolucao)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':aluno_id', $this->aluno_id);
+            $stmt->bindParam(':livro_id', $this->livro_id);
+            $stmt->bindParam(':data_emprestimo', $this->data_emprestimo);
+            $stmt->bindParam(':data_devolucao', $this->data_devolucao);
+            $stmt->execute();
+        } else {
+        
+            throw new Exception("O aluno está devendo livros e não pode realizar novo empréstimo.");
+        }
+    }
+    
+    private function alunoEstaDevedor($alunoId) {
+      
+        $emprestimosPendentes = $this->getEmprestimosPendentes($alunoId);
+    
+        return count($emprestimosPendentes) > 0;
+    }
+    
+    // Método para obter empréstimos pendentes para um aluno
+    private function getEmprestimosPendentes($alunoId) {
+        $sql = "SELECT * FROM emprestimos WHERE aluno_id = :aluno_id AND data_devolucao IS NULL";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':aluno_id', $this->aluno_id);
-        $stmt->bindParam(':livro_id', $this->livro_id);
-        $stmt->bindParam(':data_emprestimo', $this->data_emprestimo);
-        $stmt->bindParam(':data_devolucao', $this->data_devolucao);
+        $stmt->bindParam(':aluno_id', $alunoId);
         $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function updateEmprestimo() {
@@ -87,9 +111,6 @@ class Emprestimo {
         $stmt->execute();
     }
 }
-
-
-
 
 ?>
 

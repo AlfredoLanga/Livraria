@@ -1,5 +1,5 @@
 <?php
-// Configurações do banco de dados
+// Configurações da base de dados
 $hostname = 'localhost';
 $port = 'sua_porta';
 $username = 'seu_usuario';
