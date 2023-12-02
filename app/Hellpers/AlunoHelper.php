@@ -1,4 +1,5 @@
 <?
+require_once '../Models/config.php';
 require_once '../Controllers/AlunoController.php';
 require_once '../Models/Aluno.php';
 $alunoController = new AlunoController(new Aluno);

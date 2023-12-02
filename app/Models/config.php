@@ -1,10 +1,10 @@
 <?php
 // Configurações da base de dados
 $hostname = 'localhost';
-$port = 'sua_porta';
-$username = 'seu_usuario';
-$password = 'sua_senha';
-$database = 'seu_banco_de_dados';
+$port = '3306';
+$username = 'root';
+$password = '';
+$database = 'livraria';
 
 // Conexão PDO
 try {

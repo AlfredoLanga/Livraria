@@ -6,11 +6,22 @@
     <title>Formulário de Busca</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-         </style>
+      #voltar{
+          width: 60px;
+          margin-top: 10px;
+
+      }
+      a{
+          color: white;
+          text-decoration: none;
+          font-size: 15px;
+          text-align: center;
+      }
+  </style>
     </head>
     <body>
     <div class="container">
-      <form action="/app/Hellpers/Cadastro.php">
+      <form action="/app/Hellpers/AlunoHelper.php">
         <h2>Cadastro Aluno</h2>
     
         <label for="username">Nome:</label>
@@ -23,6 +34,7 @@
         <input type="date" id="data" name="data" required>
     
         <button type="submit">Cadastrar</button>
+        <button id="voltar" ><a href="../../../Home.html">voltar</a></button>
       </form>
     </div>
       
