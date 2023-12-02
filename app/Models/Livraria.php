@@ -1,4 +1,5 @@
 <?php
+include 'config.php';
 require_once 'Livro.php';
 require_once 'Aluno.php';
 require_once 'Emprestimo.php';

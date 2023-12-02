@@ -1,4 +1,5 @@
 <?
+include 'config.php';
     class Aluno {
 
         private $id;

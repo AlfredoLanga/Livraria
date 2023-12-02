@@ -1,5 +1,5 @@
 <?php
-
+include 'config.php';
 class Livro {
 
     private $id;
